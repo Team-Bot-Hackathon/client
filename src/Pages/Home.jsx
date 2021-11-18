@@ -117,6 +117,7 @@ function Home() {
                         variant="contained"
                         style={{ backgroundColor: "#FF7878", margin: "20px" }}
                         onClick={()=>{
+                            setLoading(true)
                             axios.post(ADD_MEDICINE,{
                                 "name": name,
                                 "quantity":quantity
@@ -134,10 +135,12 @@ function Home() {
                                     }).then(res=>{
                                         console.log(res.data['data']);
                                         setmedList(res.data['data']);
+                                        setLoading(false)
                                     })
                                 }
                                 else{
                                     alert(response.data["err"]);
+                                    setLoading(false)
                                 }
                             })
                         }}
@@ -170,6 +173,7 @@ function Home() {
                         variant="contained"
                         style={{ backgroundColor: "#FF7878", margin: "20px" }}
                         onClick={()=>{
+                            setLoading(true)
                             axios.post(UPDATE_MEDICINE,{
                                 "name": name,
                                 "quantity":quantity
@@ -188,9 +192,11 @@ function Home() {
                                         console.log(res.data['data']);
                                         setmedList(res.data['data']);
                                     })
+                                    setLoading(false)
                                 }
                                 else{
                                     alert(response.data["err"]);
+                                    setLoading(false);
                                 }
                             })
                         }}

@@ -1,11 +1,12 @@
 import { LoadingButton, TabContext, TabList, TabPanel } from '@mui/lab'
 import { Autocomplete, Button, Tab, TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import axios from 'axios'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
 import { signOut } from '../store/user'
-import {  USER } from '../utils'
+import {  CHEMIST, GET_MEDICINE_LIST, USER } from '../utils'
 
 function Home() {
 
@@ -18,7 +19,28 @@ function Home() {
     const [quantity, setquantity] = React.useState(null);
     const [loading, setLoading] = React.useState(false);
     const [currentTab, setCurrentTab] = React.useState("ADD");
+    const [medList, setmedList] = React.useState([])
 
+    useEffect(() => {
+        if(user){
+            if(type === USER){
+                axios.get(GET_MEDICINE_LIST).then(res=>{
+                    console.log(res.data['data']);
+                    setmedList(res.data['data']);
+                })
+            }
+            else if(type === CHEMIST){
+                axios.get(GET_MEDICINE_LIST,{
+                    headers:{
+                        "token":user
+                    }
+                }).then(res=>{
+                    console.log(res.data['data']);
+                    setmedList(res.data['data']);
+                })
+            }
+        }
+    }, [type, user])
 
     if(!user && !type){
         console.log("/=========")
@@ -31,10 +53,12 @@ function Home() {
     else if(type === USER){
         console.log("/user============")
         return (
-            <Box sx={{ width: "33%", typography: "body1", marginLeft: "33%", display:"flex", flexDirection:"column", justifyContent:"space-evenly", height:"100vh" }}>
+            <Box sx={{ width: "33%", typography: "body1", marginLeft: "33%", display:"flex", flexDirection:"column", justifyContent:"space-around", height:"100vh" }}>
                 <Autocomplete
                     disablePortal
-                    options={[]}
+                    options={medList.map(({id,name})=>{
+                        return name;
+                    })}
                     sx={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Medicines" />}
                 />
@@ -121,6 +145,12 @@ function Home() {
                     </LoadingButton>
                 </TabPanel>
             </TabContext>
+            <Button variant="contained" sx={{ width: 300, height:"50px" }}  onClick={()=>{
+                    dispatch(signOut());
+                    history.replace("/")
+                }} >
+                    Sign Out
+                </Button>
             </Box>
         )
     }

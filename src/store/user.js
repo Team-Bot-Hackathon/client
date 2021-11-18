@@ -3,7 +3,7 @@ import { createSlice, configureStore } from '@reduxjs/toolkit'
 export const userSlice = createSlice({
     name: 'user',
     initialState: {
-        user: JSON.parse(localStorage.getItem('token')),
+        user: localStorage.getItem('token') === "null"  ? null : localStorage.getItem('token'),
         type:localStorage.getItem('type'),
     },
     reducers: {

@@ -6,7 +6,7 @@ import TabPanel from "@mui/lab/TabPanel";
 import { Button, Tab, TextField } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { useDispatch, useSelector } from "react-redux";
-import { CHEMIST, CHEMIST_SIGNUP_URL, USER, USER_SIGNUP_URL } from "../utils";
+import { CHEMIST, CHEMIST_SIGNUP_URL, USER, USER_SIGNIN_URL, USER_SIGNUP_URL } from "../utils";
 import { useHistory,Redirect } from "react-router-dom";
 import { setUser, signOut } from "../store/user";
 import axios from "axios";
@@ -28,6 +28,28 @@ const SignUp = () => {
     const history = useHistory();
 
     const handleSignInUser = () => {
+        setLoading(true);
+        axios.post(USER_SIGNIN_URL,{
+            user_name:displayName.toString(),
+            password:password.toString()
+        },{
+            headers:{
+                "content-type":"application/json",
+            }
+        }).then((res)=>{
+            console.log(res);
+            if(res.data["signedIn"]){
+                dispatch(setUser(res.data["token"]))
+                history.push("/home")
+            }
+            else{
+                alert(res.data["err"] || res.data["sqlMessage"]);
+            }
+            setLoading(false);
+        }).catch(err=>{
+            console.log(err)
+            setLoading(false);
+        })
     };
     const handleSignInChemist = () => {
     };

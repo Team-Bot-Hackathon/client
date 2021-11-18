@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
 import { signOut } from '../store/user'
-import {  CHEMIST, GET_MEDICINE_LIST, GET_MEDICINE_LIST_CHEMIST, USER } from '../utils'
+import {  ADD_MEDICINE, CHEMIST, GET_MEDICINE_LIST, GET_MEDICINE_LIST_CHEMIST, UPDATE_MEDICINE, USER } from '../utils'
 
 function Home() {
 
@@ -116,6 +116,31 @@ function Home() {
                         loading={loading}
                         variant="contained"
                         style={{ backgroundColor: "#FF7878", margin: "20px" }}
+                        onClick={()=>{
+                            axios.post(ADD_MEDICINE,{
+                                "name": name,
+                                "quantity":quantity
+                            },{
+                                headers:{
+                                    "content-type":"application/json",
+                                    "token":user
+                                }
+                            }).then((response)=>{
+                                if(response.data["action"]){
+                                    axios.get(GET_MEDICINE_LIST_CHEMIST,{
+                                        headers:{
+                                            "token":user
+                                        }
+                                    }).then(res=>{
+                                        console.log(res.data['data']);
+                                        setmedList(res.data['data']);
+                                    })
+                                }
+                                else{
+                                    alert(response.data["err"]);
+                                }
+                            })
+                        }}
                     >
                         Add
                     </LoadingButton>
@@ -144,7 +169,31 @@ function Home() {
                         loading={loading}
                         variant="contained"
                         style={{ backgroundColor: "#FF7878", margin: "20px" }}
-                        load
+                        onClick={()=>{
+                            axios.post(UPDATE_MEDICINE,{
+                                "name": name,
+                                "quantity":quantity
+                            },{
+                                headers:{
+                                    "content-type":"application/json",
+                                    "token":user
+                                }
+                            }).then((response)=>{
+                                if(response.data["action"]){
+                                    axios.get(GET_MEDICINE_LIST_CHEMIST,{
+                                        headers:{
+                                            "token":user
+                                        }
+                                    }).then(res=>{
+                                        console.log(res.data['data']);
+                                        setmedList(res.data['data']);
+                                    })
+                                }
+                                else{
+                                    alert(response.data["err"]);
+                                }
+                            })
+                        }}
                     >
                         Update
                     </LoadingButton>
@@ -153,7 +202,7 @@ function Home() {
             <List>
                 {medList.map((med)=>{
                     return(
-                        <ListItem>
+                        <ListItem key ={med.name}>
                             <ListItemText>
                                 {`Medicine Name: ${med.name} Quantity: ${med.quantity}`}
                             </ListItemText>

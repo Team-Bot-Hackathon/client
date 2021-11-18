@@ -1,12 +1,12 @@
 import { LoadingButton, TabContext, TabList, TabPanel } from '@mui/lab'
-import { Autocomplete, Button, Tab, TextField } from '@mui/material'
+import { Autocomplete, Button, List, ListItem, ListItemText, Tab, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, useHistory } from 'react-router-dom'
 import { signOut } from '../store/user'
-import {  CHEMIST, GET_MEDICINE_LIST, USER } from '../utils'
+import {  CHEMIST, GET_MEDICINE_LIST, GET_MEDICINE_LIST_CHEMIST, USER } from '../utils'
 
 function Home() {
 
@@ -30,7 +30,7 @@ function Home() {
                 })
             }
             else if(type === CHEMIST){
-                axios.get(GET_MEDICINE_LIST,{
+                axios.get(GET_MEDICINE_LIST_CHEMIST,{
                     headers:{
                         "token":user
                     }
@@ -53,12 +53,17 @@ function Home() {
     else if(type === USER){
         console.log("/user============")
         return (
-            <Box sx={{ width: "33%", typography: "body1", marginLeft: "33%", display:"flex", flexDirection:"column", justifyContent:"space-around", height:"100vh" }}>
+            <Box sx={{ width: "33%", typography: "body1", marginLeft: "33%", display:"flex", flexDirection:"column", justifyContent:"center", height:"100vh" }}>
                 <Autocomplete
                     disablePortal
                     options={medList.map(({id,name})=>{
                         return name;
                     })}
+                    onChange={(e)=>{
+                        if(medList[e.target.value]){
+                            console.log(medList[e.target.value])
+                        }
+                    }}
                     sx={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Medicines" />}
                 />
@@ -145,6 +150,17 @@ function Home() {
                     </LoadingButton>
                 </TabPanel>
             </TabContext>
+            <List>
+                {medList.map((med)=>{
+                    return(
+                        <ListItem>
+                            <ListItemText>
+                                {`Medicine Name: ${med.name} Quantity: ${med.quantity}`}
+                            </ListItemText>
+                        </ListItem>
+                    )
+                })}
+            </List>
             <Button variant="contained" sx={{ width: 300, height:"50px" }}  onClick={()=>{
                     dispatch(signOut());
                     history.replace("/")
@@ -152,6 +168,7 @@ function Home() {
                     Sign Out
                 </Button>
             </Box>
+
         )
     }
 }

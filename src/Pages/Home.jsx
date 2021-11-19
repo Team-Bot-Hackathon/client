@@ -106,7 +106,7 @@ function Home() {
                         onChange={(e) => {
                             setname(e.target.value);
                         }}
-                        style={{ margin: "20px" }}
+                        style={{ marginBlock: "20px" }}
                     />
                     <TextField
                         variant="outlined"
@@ -114,12 +114,12 @@ function Home() {
                         onChange={(e) => {
                             setquantity(e.target.value);
                         }}
-                        style={{ margin: "20px" }}
+                        style={{ marginBlock: "20px" }}
                     />
                     <LoadingButton
                         loading={loading}
                         variant="contained"
-                        style={{ backgroundColor: "#FF7878", margin: "20px" }}
+                        style={{ marginBlock: "20px" }}
                         onClick={()=>{
                             setLoading(true)
                             axios.post(ADD_MEDICINE,{
@@ -151,6 +151,12 @@ function Home() {
                     >
                         Add
                     </LoadingButton>
+                    <Button variant="contained" sx={{ height:"50px" }}  onClick={()=>{
+                    dispatch(signOut());
+                    history.replace("/")
+                }} >
+                    Sign Out
+                </Button>
                 </TabPanel>
                 <TabPanel
                     value={"UPDATE"}
@@ -207,6 +213,12 @@ function Home() {
                     >
                         Update
                     </LoadingButton>
+                    <Button variant="contained" sx={{ height:"50px" }}  onClick={()=>{
+                    dispatch(signOut());
+                    history.replace("/")
+                }} >
+                    Sign Out
+                </Button>
                 </TabPanel>
             </TabContext>
             <List>
@@ -220,12 +232,6 @@ function Home() {
                     )
                 })}
             </List>
-            <Button variant="contained" sx={{ width: 300, height:"50px" }}  onClick={()=>{
-                    dispatch(signOut());
-                    history.replace("/")
-                }} >
-                    Sign Out
-                </Button>
             </Box>
 
         )

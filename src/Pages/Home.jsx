@@ -1,5 +1,5 @@
 import { LoadingButton, TabContext, TabList, TabPanel } from '@mui/lab'
-import { Autocomplete, Button, List, ListItem, ListItemText, Tab, TextField } from '@mui/material'
+import { Autocomplete, Button, List, ListItem, ListItemText, Tab, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect } from 'react'
@@ -53,7 +53,11 @@ function Home() {
     else if(type === USER){
         console.log("/user============")
         return (
-            <Box sx={{ width: "33%", typography: "body1", marginLeft: "33%", display:"flex", flexDirection:"column", justifyContent:"center", height:"100vh" }}>
+            <Box sx={{ display:"flex", flexDirection:"column", justifyContent:"space-around",width:"100%" }}>
+                <Box>
+                <Typography variant="h5">
+                    Search for Medicines
+                </Typography>
                 <Autocomplete
                     disablePortal
                     options={medList.map(({id,name})=>{
@@ -64,10 +68,10 @@ function Home() {
                             console.log(medList[e.target.value])
                         }
                     }}
-                    sx={{ width: 300 }}
                     renderInput={(params) => <TextField {...params} label="Medicines" />}
                 />
-                <Button variant="contained" sx={{ width: 300, height:"50px" }}  onClick={()=>{
+                </Box>
+                <Button variant="contained" sx={{  height:"50px" }}  onClick={()=>{
                     dispatch(signOut());
                     history.replace("/")
                 }} >
@@ -79,7 +83,7 @@ function Home() {
     else{
         console.log("/chemist============")
         return (
-            <Box sx={{ width: "33%", typography: "body1", marginLeft: "33%" }}>
+            <Box sx={{ display:"flex", flexDirection:"column", justifyContent:"center" }}>
                 <TabContext value={currentTab}>
                 <Box>
                     <TabList

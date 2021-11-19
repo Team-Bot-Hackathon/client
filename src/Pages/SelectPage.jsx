@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { useHistory, Redirect } from 'react-router-dom'
 import { setType } from '../store/user'
 import { CHEMIST, USER } from '../utils'
+import {Person,LocalHospital} from '@mui/icons-material';
 
 function SelectPage() {
 
@@ -20,14 +21,14 @@ function SelectPage() {
     }
 
     return (
-        <Box sx={{ width: "33%", typography: "body1", marginLeft: "33%", display:"flex", flexDirection:"column", justifyContent:"space-evenly", height:"100vh" }}>
-            <Button sx={{height:"200px"}} variant="contained" onClick={()=>{
+        <Box sx={{ typography: "body1", width:"100%", display:"flex", flexDirection:"column", justifyContent:"space-evenly" }}>
+            <Button sx={{height:"100px"}} startIcon={<Person/>} variant="contained" onClick={()=>{
                 dispatch(setType(USER));
                 history.replace("/home")
             }} >
                 User 
             </Button >
-            <Button sx={{height:"200px"}} variant="contained" onClick={()=>{
+            <Button sx={{height:"100px"}} startIcon={<LocalHospital/>} variant="contained" onClick={()=>{
                 dispatch(setType(CHEMIST));
                 history.replace("/home")
             }} >

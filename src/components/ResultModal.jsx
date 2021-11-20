@@ -5,7 +5,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { useDispatch, useSelector } from 'react-redux';
 import { setBanner, setModalOpen } from '../store/user';
-import { AppBar,  Paper, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar } from '@mui/material';
+import { AppBar,  Paper, Skeleton, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import Mapcomponent from './Mapcomponent';
 import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab';
@@ -42,7 +42,7 @@ export default function ResultModal() {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <Box sx={{flexGrow:1,display:"flex",flexDirection:"row"}} >
+            {data["shop"] ? <Box sx={{flexGrow:1,display:"flex",flexDirection:"row"}} >
                 <Box sx={{width:"50%"}} >
                     <TableContainer component={Paper}>
                         {data && <Table sx={{ backgroundColor: 'white' }} aria-label="simple table">
@@ -103,7 +103,21 @@ export default function ResultModal() {
                 <Box sx={{width:"50%"}} >
                     <Mapcomponent/>
                 </Box>
-            </Box>
+            </Box> : 
+            (
+                <>
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+                <Skeleton animation="wave" />
+                </>
+            )
+            }
         </Dialog>
     );
 }

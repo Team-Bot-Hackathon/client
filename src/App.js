@@ -89,31 +89,29 @@ function App() {
           </Switch>
         </Box>
       </Box>
-      <Grid container columns={12} sx={{marginBottom:"50px"}} >
-        <Grid item sx={{  marginLeft: "50px", marginTop: '50px' }} xs={12}>
+      <Grid container columns={12} sx={{ marginBottom: "50px" }} >
+        <Grid item sx={{ marginLeft: "50px", marginTop: '50px' }} xs={12}>
           <Grid container sx={{ display: 'flex', justifyContent: "center" }} columns={12} >
             <Grid xs={4} >
-              <Typography align="center" variant="h5" >Heading</Typography>
+              <Typography align="center" variant="h5" >Users</Typography>
               <Typography variant="body1" >
-                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-              </Typography>
+                The WebApp has a graph of all the registered pharmacy shops. After signing up, a user can select the required medicine. Initially, the application will check the inventory of the pharmacy nearest to the user. If the nearest pharmacy contains the medicine, then it will return the information to the user. If not, then the application will search for all the pharmacies which have the required medicine. Then, using algorithms, the WebApp will select the shop which has the required medicine and is closest to the user. Once this process is done, the application will share the information with the user. The information will appear on a map and will guide the user to the nearest pharmacy. The result will also include an efficient path for the user to navigate through multiple pharmacies which have the required medicine. Hence, the user can reach the pharmacy to procure the required medicine.            </Typography>
             </Grid>
             <Grid sx={{ display: 'flex', justifyContent: "center", alignContent: "center" }} xs={4} >
-              <img alt="img1" width="400px" style={{borderRadius:"10px"}} src={Image1} />
+              <img alt="img1" width="400px" style={{ borderRadius: "10px" }} src={Image1} />
             </Grid>
           </Grid>
         </Grid>
-        <Grid item sx={{  marginRight: "50px", marginTop: '50px' }} xs={12}>
+        <Grid item sx={{ marginRight: "50px", marginTop: '50px' }} xs={12}>
           <Grid container sx={{ display: 'flex', justifyContent: "center" }} columns={12} >
             <Grid sx={{ display: 'flex', justifyContent: "center", alignContent: "center" }} xs={4} >
-              <img alt="img2" width="400px" style={{borderRadius:"10px"}} src={Image2} />
+              <img alt="img2" width="400px" style={{ borderRadius: "10px" }} src={Image2} />
             </Grid>
             <Grid xs={4} >
-            <Typography align="center" variant="h5" >Heading</Typography>
+              <Typography align="center" variant="h5" >Pharmacies</Typography>
               <Typography variant="body1" >
-                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.
-              </Typography>            
-              </Grid>
+                The pharmacies have the option of registering themselves on the WebApp. After registering successfully, the pharmacies can add as well as delete a medicine, depending on the availability of the medicine. The pharmacies can further update the stock of their medicines as and when required. When a customer is in need of a medicine, he will be suggested to go to the pharmacy closest to him which has the medicine. This promotes the pharmacy owners to constantly keep available the important medicines so that they do not miss out on the local business opportunities. This will increase the business of the pharmacies as more of the local crowd which was not aware of the shop will now start doing transactions with it. Many more people who encounter emergencies in the area will tend to go to the nearest pharmacy to them.              </Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

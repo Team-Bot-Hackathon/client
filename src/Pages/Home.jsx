@@ -1,5 +1,5 @@
 import { LoadingButton, TabContext, TabList, TabPanel } from '@mui/lab'
-import { Autocomplete, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
+import { Autocomplete, CircularProgress, Paper, Tab, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TextField, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect } from 'react'
@@ -21,6 +21,7 @@ function getData(position,ss){
 
 function Home() {
 
+    const [progress,setProgress] = React.useState(false)
     const type = useSelector(state => state.user.type)
     const user = useSelector(state => state.user["user"])
     const dispatch = useDispatch()
@@ -78,6 +79,7 @@ function Home() {
                             if (id) {
                                 console.log(id,value)
                                 navigator.geolocation.getCurrentPosition((position)=>{
+                                    setProgress(true)
                                     axios.post(GET_RESULT,
                                         {
                                             "medicine_id":id,
@@ -99,12 +101,17 @@ function Home() {
                                             dispatch(setDistance({distance:distArray[i],index:i})) 
                                         }
                                         dispatch(setModalOpen(true))
+                                        setProgress(false);
+                                    }).catch(err=>{
+                                        setProgress(false);
+                                        alert("No Medicines Available")
                                     })
                                 })
                             }
                         }}
                         renderInput={(params) => <TextField {...params}  label="" />}
                     />
+                    {progress && <Box sx={{width:"100%",display:"flex",justifyContent:"center",marginTop:"10px"}} ><CircularProgress /></Box>}
                 </Box>
             </Box>
         )

@@ -8,6 +8,7 @@ import { setBanner, setModalOpen } from '../store/user';
 import { AppBar,  Paper, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import Mapcomponent from './Mapcomponent';
+import { Timeline, TimelineConnector, TimelineContent, TimelineDot, TimelineItem, TimelineSeparator } from '@mui/lab';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -70,7 +71,7 @@ export default function ResultModal() {
                                             {row.contact_no}
                                         </TableCell>
                                         <TableCell component="th" scope="row">
-                                            {row.distance}
+                                            {`${row.distance.toFixed(2)} KM`}
                                         </TableCell>
                                         <TableCell component="th" scope="row">
                                             {row.quantity}
@@ -80,6 +81,24 @@ export default function ResultModal() {
                             </TableBody>
                         </Table>}
                     </TableContainer>
+                    <Typography variant="h5" sx={{margin:"10px"}} >
+                        Follow this path to cover maximum pharmacies with minimum travel:  
+                    </Typography>
+                    <Timeline position="alternate">
+                        {data["path"] && data["path"].map((index,i)=>{
+                            let lastIndex = data["path"].length;
+                            console.log(lastIndex)
+                            return(
+                                <TimelineItem>
+                                    <TimelineSeparator>
+                                    <TimelineDot sx={{backgroundColor:"#51eaea"}} />
+                                    {lastIndex-1 === i ? null : <TimelineConnector />}
+                                    </TimelineSeparator>
+                                    <TimelineContent>{data["shop"].find((obj)=>obj.pharmacy_id===index)?.name}</TimelineContent>
+                                </TimelineItem>
+                            )
+                        })}
+                </Timeline>
                 </Box>
                 <Box sx={{width:"50%"}} >
                     <Mapcomponent/>

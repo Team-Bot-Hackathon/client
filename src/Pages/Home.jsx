@@ -246,7 +246,7 @@ function Home() {
                             <TableHead>
                                 <TableRow>
                                     <TableCell>Medicine Name</TableCell>
-                                    <TableCell align="left">Calories</TableCell>
+                                    <TableCell align="left">Quantity</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

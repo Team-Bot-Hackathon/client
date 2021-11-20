@@ -198,8 +198,8 @@ const SignUp = () => {
                                 setCurrentTab(v);
                             }}
                         >
-                            <Tab label="Sign Up" value={"SIGNUP"} />
-                            <Tab label="Sign In" value={"SIGNIN"} />
+                            <Tab label={`${type === USER ? "User": "Pharmacy"} Sign Up`} value={"SIGNUP"} />
+                            <Tab label={`${type === USER ? "User": "Pharmacy"} Sign In`} value={"SIGNIN"} />
                         </TabList>
                     </Box>
                     <TabPanel
@@ -217,6 +217,7 @@ const SignUp = () => {
                             <TextField
                                 variant="outlined"
                                 placeholder="Password"
+                                type="password"
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                 }}
@@ -274,6 +275,7 @@ const SignUp = () => {
                             />
                             <TextField
                                 variant="outlined"
+                                type="password"
                                 placeholder="Password"
                                 onChange={(e) => {
                                     setPassword(e.target.value);

@@ -41,7 +41,7 @@ export default function ResultModal() {
                     </IconButton>
                 </Toolbar>
             </AppBar>
-            <Box sx={{flexGrow:1}} >
+            <Box sx={{flexGrow:1,display:"flex",flexDirection:"row"}} >
                 <Box sx={{width:"50%"}} >
                     <TableContainer component={Paper}>
                         {data && <Table sx={{ backgroundColor: 'white' }} aria-label="simple table">

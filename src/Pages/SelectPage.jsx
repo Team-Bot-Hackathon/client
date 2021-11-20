@@ -1,6 +1,6 @@
 import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useHistory, Redirect } from 'react-router-dom'

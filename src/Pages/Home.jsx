@@ -4,20 +4,9 @@ import { Box } from '@mui/system'
 import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Redirect, useHistory } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { setBanner, setDistance, setmodalData, setModalOpen } from '../store/user'
 import { ADD_MEDICINE, CHEMIST, GET_DISTANCE, GET_MEDICINE_LIST, GET_MEDICINE_LIST_CHEMIST, GET_RESULT, UPDATE_MEDICINE, USER } from '../utils'
-
-function getDistance (position,ss){
-    new Promise((resolve,reject) => {
-        axios.post(GET_DISTANCE,{
-            "lat1":position.coords.latitude,
-            "lon1":position.coords.longitude,
-            "lat2":ss.lat,
-            "lon2":ss.lon
-        }).then((response)=>{resolve(response.data.route.distance)})
-    })
-}
 
 function getData(position,ss){
     return new Promise(function(resolve,reject){
@@ -30,21 +19,11 @@ function getData(position,ss){
     })
 }
 
-async function getAll(shop,position){
-    let distArray = [];
-    for(let i = 0;i<shop.length;i++){
-        distArray[i] = await getDistance(position,shop[i]);
-    }
-    console.log(distArray,"----------------------");
-    return distArray;
-}
-
 function Home() {
 
     const type = useSelector(state => state.user.type)
     const user = useSelector(state => state.user["user"])
     const dispatch = useDispatch()
-    const history = useHistory()
     console.log(user, type);
     const [name, setname] = React.useState("");
     const [quantity, setquantity] = React.useState(0);

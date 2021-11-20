@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setBanner, setModalOpen } from '../store/user';
 import { AppBar,  Paper, Slide, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
+import Mapcomponent from './Mapcomponent';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -80,7 +81,8 @@ export default function ResultModal() {
                         </Table>}
                     </TableContainer>
                 </Box>
-                <Box>
+                <Box sx={{width:"50%"}} >
+                    <Mapcomponent/>
                 </Box>
             </Box>
         </Dialog>

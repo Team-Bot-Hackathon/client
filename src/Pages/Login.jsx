@@ -15,9 +15,8 @@ import {
     USER_SIGNUP_URL,
 } from "../utils";
 import { useHistory, Redirect } from "react-router-dom";
-import { setUser, signOut } from "../store/user";
+import { setBanner, setUser, signOut } from "../store/user";
 import axios from "axios";
-import { ArrowBackIos } from "@mui/icons-material";
 
 const SignUp = () => {
     const type = useSelector((state) => state.user.type);
@@ -33,6 +32,7 @@ const SignUp = () => {
 
     const dispatch = useDispatch();
     const history = useHistory();
+    dispatch(setBanner(false))
 
     const handleSignInUser = () => {
         setLoading(true);
@@ -190,14 +190,13 @@ const SignUp = () => {
         return <Redirect to="/" />;
     } else {
         return (
-            <Box sx={{ width: "100%" }} >
-                <TabContext value={currentTab}>
-                    <Box>
+            <TabContext value={currentTab}>
+                <Box sx={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center", marginTop: "10px" }}>
+                    <Box sx={{ display: "flex", justifyContent: "center", width: "500px" }} >
                         <TabList
                             onChange={(e, v) => {
                                 setCurrentTab(v);
                             }}
-                            centered
                         >
                             <Tab label="Sign Up" value={"SIGNUP"} />
                             <Tab label="Sign In" value={"SIGNIN"} />
@@ -206,14 +205,14 @@ const SignUp = () => {
                     <TabPanel
                         value={"SIGNUP"}
                     >
-                        <Box sx={{ display: "flex", flexDirection: 'column' }}>
+                        <Box sx={{ display: "flex", flexDirection: 'column', justifyContent: "center", width: "500px" }}>
                             <TextField
+                                sx={{ marginBlock: "10px", color: "#fff", borderColor: "white" }}
                                 variant="outlined"
                                 placeholder="UserName"
                                 onChange={(e) => {
                                     setdisplayName(e.target.value);
                                 }}
-                                style={{ margin: "20px" }}
                             />
                             <TextField
                                 variant="outlined"
@@ -221,7 +220,7 @@ const SignUp = () => {
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                 }}
-                                style={{ margin: "20px" }}
+                                sx={{ marginBlock: "10px" }}
                             />
                             {type === CHEMIST && (
                                 <>
@@ -231,7 +230,7 @@ const SignUp = () => {
                                         onChange={(e) => {
                                             setpharmaName(e.target.value);
                                         }}
-                                        style={{ margin: "20px" }}
+                                        style={{ marginBlock: "10px" }}
                                     />
                                     <TextField
                                         variant="outlined"
@@ -239,7 +238,7 @@ const SignUp = () => {
                                         onChange={(e) => {
                                             setAddress(e.target.value);
                                         }}
-                                        style={{ margin: "20px" }}
+                                        style={{ marginBlock: "10px" }}
                                     />
                                     <TextField
                                         variant="outlined"
@@ -247,7 +246,7 @@ const SignUp = () => {
                                         onChange={(e) => {
                                             setContact(e.target.value);
                                         }}
-                                        style={{ margin: "20px" }}
+                                        style={{ marginBlock: "10px" }}
                                     />
                                 </>
                             )}
@@ -255,31 +254,23 @@ const SignUp = () => {
                                 loading={loading}
                                 variant="contained"
                                 onClick={type === USER ? handleSignUpUser : handleSignUpChemist}
-                                style={{ margin: "20px" }}
+                                style={{ marginBlock: "10px" }}
                             >
                                 SIGN UP
                             </LoadingButton>
-                            <Button
-                                variant="contained"
-                                onClick={() => { history.replace("/") }}
-                                style={{ margin: "20px" }}
-                                startIcon={<ArrowBackIos/>}
-                            >
-                                Back to Select Role
-                            </Button>
                         </Box>
                     </TabPanel>
                     <TabPanel
                         value={"SIGNIN"}
                     >
-                        <Box sx={{ display: "flex", flexDirection: 'column' }}>
+                        <Box sx={{ display: "flex", flexDirection: 'column', justifyContent: "center", width: "500px" }}>
                             <TextField
                                 variant="outlined"
                                 placeholder="UserName"
                                 onChange={(e) => {
                                     setdisplayName(e.target.value);
                                 }}
-                                style={{ margin: "20px" }}
+                                style={{ marginBlock: "10px" }}
                             />
                             <TextField
                                 variant="outlined"
@@ -287,29 +278,21 @@ const SignUp = () => {
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                 }}
-                                style={{ margin: "20px" }}
+                                style={{ marginBlock: "10px" }}
                             />
                             <LoadingButton
                                 loading={loading}
                                 variant="contained"
                                 onClick={type === USER ? handleSignInUser : handleSignInChemist}
-                                style={{ margin: "20px" }}
+                                style={{ marginBlock: "10px" }}
                                 load
                             >
                                 SIGN IN
                             </LoadingButton>
-                            <Button
-                                variant="contained"
-                                onClick={() => { history.replace("/") }}
-                                style={{ margin: "20px" }}
-                                startIcon={<ArrowBackIos/>}
-                            >
-                                Back to Select Role
-                            </Button>
                         </Box>
                     </TabPanel>
-                </TabContext>
-            </Box>
+                </Box>
+            </TabContext>
         );
     }
 };

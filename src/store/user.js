@@ -5,6 +5,9 @@ export const userSlice = createSlice({
     initialState: {
         user: localStorage.getItem('token') === "null"  ? null : localStorage.getItem('token'),
         type:localStorage.getItem('type'),
+        modalData:{},
+        modalOpen:false,
+        isBanner:false,
     },
     reducers: {
         setUser: (state,action) => {
@@ -19,12 +22,24 @@ export const userSlice = createSlice({
             localStorage.setItem('token',null);
             state.user=null;
             state.type=null;
-        }
+        },
+        setModalOpen: (state,action)=>{
+            state.modalOpen=action.payload;
+        },
+        setmodalData:(state,action)=>{
+            state.modalData=action.payload;
+        },
+        setBanner:(state,action)=>{
+            state.isBanner=action.payload;
+        },
+        setDistance:(state,action)=>{
+            state.modalData.shop[action.payload.index]={...state.modalData.shop[action.payload.index],distance:action.payload.distance}
+        }   
     }
 })
 
 
-export const { setUser, setType, signOut } = userSlice.actions
+export const { setUser, setType, signOut, setModalOpen, setmodalData, setBanner, setDistance } = userSlice.actions
 
 export default configureStore({
     reducer: {

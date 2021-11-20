@@ -1,14 +1,6 @@
 body {
   margin: 0;
-  height: 100vh;
   font-family: 'Titillium Web', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-image: url("https://preview.colorlib.com/theme/pharma/images/xhero_1.jpg.pagespeed.ic.ZZMiAwgmOC.webp");  
-  display: flex;
-  justify-content: center;
-  align-items: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
 }
